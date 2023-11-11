@@ -51,7 +51,8 @@ export default function SignIn() {
   const mutation = useMutation((userSignInDto) => loginUser(userSignInDto), {
     onSuccess: (data) => {
       alert("success");
-      localStorage.setItem("token", data.data.token);
+      console.log(data);
+      localStorage.setItem("token", data.data.jwt);
       localStorage.setItem("refreshToken", data.data.refreshToken);
       window.dispatchEvent(new Event("tokenChanged"));
       navigate("/");

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Footer from "../footer/Footer";
 import Styles from "../layout/Layout.module.css";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../customhooks/useUser";
 
 function Layout({ children }) {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function Layout({ children }) {
   const handleWelcomeClick = () => {
     navigate("/");
   };
+  const { isAuthenticated } = useUser();
 
   return (
     <div>
@@ -33,9 +35,13 @@ function Layout({ children }) {
           </Button>
           <Button color="inherit">Hotels</Button>
           <Button color="inherit">Rooms</Button>
-          <Button onClick={handleLoginClick} color="inherit">
-            Login
-          </Button>
+          {isAuthenticated ? (
+            <Button color="inherit">Welcome</Button>
+          ) : (
+            <Button onClick={handleLoginClick} color="inherit">
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <div className={Styles.main}>{children}</div>

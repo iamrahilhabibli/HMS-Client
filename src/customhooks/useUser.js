@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
-const useUser = () => {
+export const useUser = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isTokenExpired, setIsTokenExpired] = useState(false);
   const [userId, setUserId] = useState(null);
@@ -25,7 +25,12 @@ const useUser = () => {
   };
   useEffect(() => {
     checkAuthentication();
+    window.addEventListener("tokenChanged", checkAuthentication);
+    return () => {
+      window.removeEventListener("tokenChanged", checkAuthentication);
+    };
   }, []);
+
   return {
     isAuthenticated,
     isTokenExpired,
