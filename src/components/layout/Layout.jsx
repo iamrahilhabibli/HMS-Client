@@ -19,6 +19,9 @@ function Layout({ children }) {
   const handleWelcomeClick = () => {
     navigate("/");
   };
+  const handleHotelClick = () => {
+    navigate("/hotels");
+  };
   const { isAuthenticated } = useUser();
 
   return (
@@ -33,7 +36,9 @@ function Layout({ children }) {
           <Button onClick={handleHomeClick} color="inherit">
             Home
           </Button>
-          <Button color="inherit">Hotels</Button>
+          <Button color="inherit" onClick={handleHotelClick}>
+            Hotels
+          </Button>
           <Button color="inherit">Rooms</Button>
           {isAuthenticated ? (
             <Button color="inherit">Welcome</Button>
