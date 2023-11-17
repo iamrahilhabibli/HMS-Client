@@ -36,7 +36,6 @@ export default function HotelCard({ hotel }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader title={hotel.name} />
-
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {hotel.description}

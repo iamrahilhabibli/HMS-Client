@@ -16,3 +16,6 @@ export const loginUser = (userSignInDto) => {
 export const getAllHotels = () => {
   return API.get("/Hotels/GetAllHotels");
 };
+export const getHotelsList = (page, pageSize) => {
+  return API.get(`Hotels/HotelsList?page=${page}`);
+};
