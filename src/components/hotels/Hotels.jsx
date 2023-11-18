@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import { getHotelsList } from "../../configs/apiConfigs";
 import { CircularProgress, Pagination } from "@mui/material";
 import HotelCard from "./HotelCard";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function Hotels() {
-  const [hotels, setHotels] = useState([]);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const pageValue = queryParams.get("page");
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [hotels, setHotels] = useState([]);
+  const [currentPage, setCurrentPage] = useState(pageValue);
   const [totalCount, setTotalCount] = useState(0);
   const itemsPerPage = 3;
+
   useEffect(() => {
     const fetchHotels = async () => {
       try {
@@ -22,8 +27,13 @@ export default function Hotels() {
       }
     };
     fetchHotels();
-  }, []);
+  }, [currentPage, itemsPerPage]);
   const nPages = Math.ceil(totalCount / itemsPerPage);
+  const handlePageChange = (event, value) => {
+    console.log(value);
+    window.history.pushState(null, null, `/hotels?page=${value}`);
+    setCurrentPage(value);
+  };
   if (isLoading) {
     return (
       <div
@@ -38,6 +48,7 @@ export default function Hotels() {
       </div>
     );
   }
+
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       <h1>Hotels</h1>
@@ -49,7 +60,7 @@ export default function Hotels() {
           flexWrap: "wrap",
         }}
       >
-        {hotels.map((hotel, index) => (
+        {hotels?.map((hotel) => (
           <div key={hotel.Id} style={{ flex: "0 0 15%", margin: "16px" }}>
             <HotelCard hotel={hotel} />
           </div>
@@ -62,7 +73,13 @@ export default function Hotels() {
           alignItems: "center",
         }}
       >
-        <Pagination count={nPages} defaultPage={1} shape="rounded" />
+        <Pagination
+          onChange={handlePageChange}
+          count={nPages}
+          page={parseInt(currentPage)}
+          defaultPage={1}
+          shape="rounded"
+        />
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ function Layout({ children }) {
     navigate("/");
   };
   const handleHotelClick = () => {
-    navigate("/hotels");
+    navigate(`/hotels?page=${1}`);
   };
   const { isAuthenticated } = useUser();
 
