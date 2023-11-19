@@ -18,6 +18,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { useMutation } from "react-query";
 import { loginUser } from "../../configs/apiConfigs";
+import { Alert } from "@mui/material";
 
 // function Copyright(props) {
 //   return (
@@ -50,7 +51,7 @@ export default function SignIn() {
   };
   const mutation = useMutation((userSignInDto) => loginUser(userSignInDto), {
     onSuccess: (data) => {
-      alert("success");
+      <Alert severity="success">Welcome back!</Alert>;
       console.log(data);
       localStorage.setItem("token", data.data.jwt);
       localStorage.setItem("refreshToken", data.data.refreshToken);
@@ -58,7 +59,7 @@ export default function SignIn() {
       navigate("/");
     },
     onError: () => {
-      alert("something went wrong");
+      <Alert severity="error">Something went wrong!</Alert>;
       setInvalidCredentials(true);
     },
   });

@@ -13,6 +13,7 @@ export const registerUser = (userRegisterDto) => {
 export const loginUser = (userSignInDto) => {
   return API.post("/Accounts/Login", userSignInDto);
 };
+
 export const getAllHotels = () => {
   return API.get("/Hotels/GetAllHotels");
 };

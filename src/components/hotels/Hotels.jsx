@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getHotelsList } from "../../configs/apiConfigs";
 import { CircularProgress, Pagination } from "@mui/material";
 import HotelCard from "./HotelCard";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Hotels() {
   const location = useLocation();
@@ -30,7 +30,6 @@ export default function Hotels() {
   }, [currentPage, itemsPerPage]);
   const nPages = Math.ceil(totalCount / itemsPerPage);
   const handlePageChange = (event, value) => {
-    console.log(value);
     window.history.pushState(null, null, `/hotels?page=${value}`);
     setCurrentPage(value);
   };
@@ -50,37 +49,43 @@ export default function Hotels() {
   }
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <>
       <h1>Hotels</h1>
-      <div
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {hotels?.map((hotel) => (
+            <div key={hotel.Id} style={{ flex: "0 0 15%", margin: "16px" }}>
+              <HotelCard hotel={hotel} />
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        ></div>
+      </div>
+      <Pagination
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          flexWrap: "wrap",
         }}
-      >
-        {hotels?.map((hotel) => (
-          <div key={hotel.Id} style={{ flex: "0 0 15%", margin: "16px" }}>
-            <HotelCard hotel={hotel} />
-          </div>
-        ))}
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Pagination
-          onChange={handlePageChange}
-          count={nPages}
-          page={parseInt(currentPage)}
-          defaultPage={1}
-          shape="rounded"
-        />
-      </div>
-    </div>
+        onChange={handlePageChange}
+        count={nPages}
+        page={parseInt(currentPage)}
+        defaultPage={1}
+        shape="rounded"
+      />
+    </>
   );
 }

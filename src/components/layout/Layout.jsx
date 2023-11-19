@@ -7,6 +7,8 @@ import Footer from "../footer/Footer";
 import Styles from "../layout/Layout.module.css";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../customhooks/useUser";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import ProfileDropdown from "../welcomeDropdown/ProfileDropdown";
 
 function Layout({ children }) {
   const navigate = useNavigate();
@@ -41,7 +43,7 @@ function Layout({ children }) {
           </Button>
           <Button color="inherit">Rooms</Button>
           {isAuthenticated ? (
-            <Button color="inherit">Welcome</Button>
+            <ProfileDropdown />
           ) : (
             <Button onClick={handleLoginClick} color="inherit">
               Login
