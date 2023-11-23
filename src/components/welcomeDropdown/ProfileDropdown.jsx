@@ -37,6 +37,9 @@ export default function ProfileDropdown() {
   const handleProfile = () => {
     navigate(`/profile/${userId}`);
   };
+  const handleHotelCreate = () => {
+    navigate(`/createhotel/${userId}`);
+  };
   return (
     <div>
       <Button
@@ -59,7 +62,7 @@ export default function ProfileDropdown() {
         }}
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Create Hotel</MenuItem>
+        <MenuItem onClick={handleHotelCreate}>Create Hotel</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </div>

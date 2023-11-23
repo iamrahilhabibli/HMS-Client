@@ -6,6 +6,7 @@ import SignUp from "./components/login/SignUp";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Hotels from "./components/hotels/Hotels";
 import Profile from "./components/profile/Profile";
+import CreateHotel from "./components/hotelcreateform/CreateHotel";
 
 function App() {
   const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/profile/:userId" element={<Profile />} />
+            <Route path="/createhotel/:userId" element={<CreateHotel />} />
           </Routes>
         </Layout>
       </BrowserRouter>

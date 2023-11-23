@@ -20,3 +20,7 @@ export const getAllHotels = () => {
 export const getHotelsList = (page, pageSize) => {
   return API.get(`Hotels/HotelsList?page=${page}`);
 };
+export const createHotel = (appUserId, hotelCreateDto) => {
+  console.log("AppUserId", appUserId);
+  return API.post(`/Hotels/CreateHotel/${appUserId}`, hotelCreateDto);
+};

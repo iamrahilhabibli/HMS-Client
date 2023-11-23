@@ -59,7 +59,7 @@ export default function SignIn() {
       navigate("/");
     },
     onError: () => {
-      <Alert severity="error">Something went wrong!</Alert>;
+      alert("Something went wrong");
       setInvalidCredentials(true);
     },
   });
